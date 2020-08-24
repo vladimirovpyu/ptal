@@ -1,0 +1,28 @@
+
+* Ptal project changelog
+
+
+0.0.3
+- tal:attributes
+- ptal_function plugins
+
+
+0.0.2
+- parse value
+- global and local vars
+- ptal_block plugins
+- move plugins including to top of file
+- foreach
+
+
+0.0.1 
+- start project
+- assign variables
+- fetch template
+- compile with simple_html_dom
+- parse attribute
+- tal:content
+- ta:assign
+- tal:include
+- tal:foreach
+- remove double spaces from attribute
