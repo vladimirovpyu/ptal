@@ -53,30 +53,30 @@ class Item
 
     function __construct($params)
     {
-        $this-&gt;id    = $params[&#39;id&#39;];
-        $this-&gt;pid   = $params[&#39;pid&#39;];
-        $this-&gt;title = $params[&#39;title&#39;];
-        $this-&gt;link  = $params[&#39;link&#39;];
+        $this->id    = $params['id'];
+        $this->pid   = $params['pid'];
+        $this->title = $params['title'];
+        $this->link  = $params['link'];
     }
 }
 
 $list = array();
-$list[] = new Item(array(&#39;id&#39;=&gt;1,&#39;pid&#39;=&gt;0,&#39;title&#39;=&gt;&#39;Page1&#39;));
-$list[] = new Item(array(&#39;id&#39;=&gt;2,&#39;pid&#39;=&gt;1,&#39;title&#39;=&gt;&#39;Sub Page1&#39;));
-$list[] = new Item(array(&#39;id&#39;=&gt;3,&#39;pid&#39;=&gt;1,&#39;title&#39;=&gt;&#39;Sub Page2&#39;));
+$list[] = new Item(array('id'=>1,'pid'=>0,'title'=>'Page1'));
+$list[] = new Item(array('id'=>2,'pid'=>1,'title'=>'Sub Page1'));
+$list[] = new Item(array('id'=>3,'pid'=>1,'title'=>'Sub Page2'));
 
 $tree = array();
 foreach ((array)$list as $item)
 {
-    $tree[$item-&gt;pid][$item-&gt;id] = $item;
+    $tree[$item->pid][$item->id] = $item;
 }
 
 $ptal = new Ptal;
 
-$ptal-&gt;assign(&#39;tree&#39;,$tree);
-$ptal-&gt;assign(&#39;curpage&#39;,$list[1]);
+$ptal->assign('tree',$tree);
+$ptal->assign('curpage',$list[1]);
 
-echo $ptal-&gt;fetch(&#39;treemenu.tal&#39;);
+echo $ptal->fetch('treemenu.tal');
 </pre>
 
 <h4>
