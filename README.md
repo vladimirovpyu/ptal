@@ -51,19 +51,19 @@ class Item
     var $title;
     var $link;
     
-    function __construct($params)
+    function __construct($id, $pid, $title='', $link='')
     {
-        $this->id    = $params['id'];
-        $this->pid   = $params['pid'];
-        $this->title = $params['title'];
-        $this->link  = $params['link'];
+        $this->id    = $id;
+        $this->pid   = $pid;
+        $this->title = $title;
+        $this->link  = $link;
     }
 }
 
 $list = array();
-$list[] = new Item(array('id'=>1,'pid'=>0,'title'=>'Page1'));
-$list[] = new Item(array('id'=>2,'pid'=>1,'title'=>'Sub Page1'));
-$list[] = new Item(array('id'=>3,'pid'=>1,'title'=>'Sub Page2'));
+$list[] = new Item(1, 0, 'Page1');
+$list[] = new Item(2, 1, 'Sub Page1');
+$list[] = new Item(3, 1, 'Sub Page2');
 
 $tree = array();
 foreach ((array)$list as $item)
@@ -73,8 +73,8 @@ foreach ((array)$list as $item)
 
 $ptal = new Ptal;
 
-$ptal->assign('tree',$tree);
-$ptal->assign('curpage',$list[1]);
+$ptal->assign('tree', $tree);
+$ptal->assign('curpage', $list[1]);
 
 echo $ptal->fetch('treemenu.tal');
 </pre>
