@@ -8,14 +8,11 @@ Simple template engine for PHP (TAL based)
 	index.php</h3>
 <pre class="brush:php;ruler:true;highlight: [1];">&lt;?php
 require(&#39;ptal.php&#39;);
-
-// создаем обработчик шаблонов 
+// создаем обработчик шаблонов
 $ptal = new Ptal;
-
-// устанавливаем директории 
-$ptal-&gt;template_dir = &#39;templates/&#39;;    
-$ptal-&gt;compile_dir  = &#39;templates_c/&#39;;  
-
+// устанавливаем директории
+$ptal-&gt;template_dir = &#39;templates/&#39;;
+$ptal-&gt;compile_dir  = &#39;templates_c/&#39;;
 // передаем данные в шаблонизатор
 $ptal-&gt;assign(&#39;hello&#39;,&#39;Hello&#39;);
 echo $ptal-&gt;fetch(&#39;index.tal&#39;);
@@ -31,8 +28,6 @@ echo $ptal-&gt;fetch(&#39;index.tal&#39;);
     &lt;span tal:content=&quot;Ptal!&quot;&gt;&lt;/span&gt;
   &lt;/body&gt;
 &lt;/html&gt;</pre>
-
-
 
 <h2>Пример создания рекурсивного меню</h2>
 <p>
@@ -50,7 +45,7 @@ class Item
     var $pid;
     var $title;
     var $link;
-
+    
     function __construct($params)
     {
         $this->id    = $params['id'];
@@ -77,6 +72,17 @@ $ptal->assign('tree',$tree);
 $ptal->assign('curpage',$list[1]);
 
 echo $ptal->fetch('treemenu.tal');
+</pre>
+
+<h4>
+	templates/treemenu.tal</h4>
+<pre class="brush:xml;">&lt;tal:block tal:if=&quot;!@pid&quot;   tal:assign=&quot;pid 0&quot; /&gt;
+&lt;ul tal:if=&quot;isset(@tree[@pid])&quot;&gt;
+  &lt;li tal:foreach=&quot;@tree[@pid] as $node&quot; id=&quot;phtml_{$node-&gt;id}&quot;&gt;
+    &lt;a class=&quot;item tal:if($node-&gt;id == @curpage-&gt;id) current&quot; href=&quot;{$node-&gt;link}&quot;&gt;{$node-&gt;title}&lt;/a&gt;
+    &lt;tal:block tal:if=&quot;@tree[$node-&gt;id]&quot; tal:include=&quot;file treemenu.tal;pid {$node-&gt;id};&quot; /&gt;    
+  &lt;/li&gt;
+&lt;/ul&gt;
 </pre>
 
 <h4>
